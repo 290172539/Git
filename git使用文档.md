@@ -118,7 +118,7 @@
 
    `$ git config --local user.email "email address"`：设置邮箱
 
-   `$ cat ./.git/config`：查看配置结果
+   `$ cat ./.git/config`或者`$ git config --local --list`：查看配置结果
 
 2. 全局有效设置：设置完信息保存位置：`~/.gitconfig`可以通过cat查看
 
@@ -126,7 +126,7 @@
 
    `$ git config --global user.email "email address"`：设置邮箱
 
-   `$ cat ~/.gitconfig`：查看配置结果
+   `$ cat ~/.gitconfig`或者`$ git config --global --list`：查看配置结果
 
 ​	
 
@@ -461,9 +461,73 @@
 
 # 七、ssh登录Github
 
+**https和ssh**
+
+​			前面使用的是https的方式去访问GitHub，访问的时候需要输入账号密码， git clone支持两种方式下载源码： 
+
+- https：访问时需要输入账号密码
+
+- ssh：使用前需要先配置ssh协议
+
+  ![1631003526214](git使用文档/1631003526214.png)
+
+
+
+**配置ssh**
+
+​			配置ssh之前要先设置用户名和邮箱，在**四、Git基本操作**有描述。下面开始配置ssh
+
+1. `ssh-keygen -t rsa -C "邮箱"`：执行命令生成秘钥
+
+     执行命令后需要进行3次或4次确认： 全部按回车即可
+
+2. 执行结束在默认用户路径下会生成2个名为id_rsa和id_rsa.pub的文件 
+
+    ![1631004550022](git使用文档/1631004550022.png)
+
+3.  打开id_rsa.pub文件，全选复制
+
+4. 打开github，点击头像，进入Settings
+
+5. 在`SSH&GPG keys`添加ssh配置
+
+    ![1631004884218](git使用文档/1631004884218.png) 
+
+6. 配置结束
+
+
+
+**git clone**
+
+​			git clone的时候记得选ssh协议的地址即可：如`git clone git@github.com:290172539/Git.git`，后面就能正常上传下载了。
+
 
 
 # 八、Git项目分支设计
+
+​			一个好的项目需要有一个合理的项目分支管理，下面通过**图8.1**来描述关于分支的设计
+
+- master：主分支；经过测试的，相对较为稳定的主分支版本
+
+- hotfix：热修复；主分支出现bug时，创建该分支进行修复，修复完合并到主分支和可开发分支
+
+- release：预发布分支；合并到master的测试分支，有bug就修复，然后合并回develop分支
+
+- develop：开发分支；开发新功能的基准分支
+
+- feature_goldstyle：新功能分支；要实现新功能时，创建该分支实现，最后合并回develop分支
+
+- feature_game：新功能分支；要实现新功能时，创建该分支实现
+
+    
+
+    
+
+![1631005612920](git使用文档/1631005612920.png)
+
+​																									**图8.1 项目分支设计**
+
+
 
 # 九、GitLab
 
